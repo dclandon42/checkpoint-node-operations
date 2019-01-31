@@ -1,0 +1,27 @@
+Questions
+
+1.
+
+	A: `sort` outputted the same code in the file but in alphabetical order with `case "cat":` at the top and `//write out data` at the bottom.
+	`wc` counted all the new lines, words and bytes in the file, for commands.js it outputted `43  105  1017`
+	`uniq` listed all the unique code in the file and anything repeated was removed from the output. This did nothing except remove any code because there were no repeated lines. 
+
+2.
+
+	A: I used `uniq commands.js | wc` It returned the same word count as normal because there were not any removed lines of code by the `uniq` command
+
+6.
+
+	A:
+```
+function reverseString(inputString) {
+ var arr = inputString.split(' ');
+ var arrPush = [];
+ arr.forEach((el)=>{
+ 	var word;
+ 	word = el.split('').reverse().join('');
+ 	arrPush.push(word);
+ })
+return arrPush.join(' ');
+}
+```
