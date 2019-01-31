@@ -1,0 +1,83 @@
+##Exercises
+
+###Questions
+
+
+1. What is the difference between readdirSync and readdir?
+
+A: The difference is that readdir works asynchronously and is non-blocking to other functions and methods, whereas readdirSync is blocking and synchronous meaning it does halt the progression of other methods until it is finished.
+
+2. What is the event loop and how does it handle asynchronous requests?
+
+A: The event loop is the system for handling multiple events. For asynchronous requests it will process events in a queue and while it is processing the events it will also notify when it is ready for more events, handling multiple events sequentially. The event queue has to wait for the stack to be clear before the event loop pops the function to the end of the stack for execution.
+
+3. Given the following code, specify whether the program is asynchronous and non-blocking or synchronous and blocking or synchronous and non-blocking.
+
+const fs = require('fs');
+const file = fs.readFileSync('foo.txt');
+console.log(file.toString());
+
+A: The code contains the readFileSync which is handled synchronously and is blocking. 
+
+4. Given the following code, specify whether the program is asynchronous and non-blocking or synchronous and blocking or synchronous and non-blocking.
+
+const fs = require('fs');
+fs.readFile('foo.txt', (err, file) => {
+ if (err) throw err;
+ console.log(file.toString());
+});
+console.log("test");
+
+A: The code is asynchronous and non-blocking.
+
+5. In what order will the console.log statements execute in the code below?
+
+const fs = require('fs');
+fs.readFile('foo.txt', (err, file) => {
+ if (err) throw err;
+ console.log("A");
+ console.log("B")
+});
+console.log("C");
+
+A: The events would be logged in the order  "C", then "A", then "B".
+
+6. setTimeout is a JavaScript function which calls a function after a set amount of milliseconds. Given the following code, explain in what sequence the functions will run and why.
+
+function greeting() {
+ setTimeout(() => {
+   console.log("friend");
+ }, 100);
+}
+
+function hello(){
+ console.log("hello");
+}
+
+greeting();
+hello();
+
+A: The code will log "hello" and then log "friend". It does this because it starts with the greeting function and while it processes this function, it asynchronously processes the hello function which has no time wait so "hello" is logged first, then "friend".
+
+7. Create a function which utilizes a callback. Make sure to add console.log statements to understand when your callback function is called.
+
+function first(){
+  setTimeout( function(){
+    console.log(1);
+  }, 500 );
+}
+function second(){
+  setTimeout( function (){
+    console.log(2);
+  }, 250 );
+}
+function third(){
+    console.log(3);
+}
+function countDown() {
+  first()
+  second()
+  third()
+  };
+
+countDown()
