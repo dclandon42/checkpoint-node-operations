@@ -47,6 +47,7 @@ const fs = require("fs");
           done(data);
       });
   },
+  
   //head command
   "head": function(fullPath) {
     const fileName = fullPath[0];
