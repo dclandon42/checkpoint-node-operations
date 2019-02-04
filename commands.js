@@ -25,10 +25,9 @@ const fs = require("fs");
       commandLibrary.head(userInputArray.slice(1));
       break;
     case "tail":
-    commandLibrary.head(userInput.slice(1));
+    commandLibrary.tail(userInput.slice(1));
     default:
-    console.log("Not a valid input");
-    done(userInput);
+    commandLibrary.errorHandler(userInputArray.join(" "));
 
    }
  }
@@ -47,7 +46,7 @@ const fs = require("fs");
           done(data);
       });
   },
-  
+
   //head command
   "head": function(fullPath) {
     const fileName = fullPath[0];
@@ -63,7 +62,11 @@ const fs = require("fs");
 			var length = Math.floor(data.length/2+data.length/4);
 			done(data.slice(length,data.length));
     });
-  }
+  },
+  'errorHandler': () => {
+     const errorMessage = "Command is not recognized";
+     done(errorMessage);
+ }
  };
 
  module.exports.commandLibrary = commandLibrary;
